@@ -3,6 +3,12 @@
 A full-stack web application for managing Writing Analytics Tool (WAT) resources.  
 Frontend is built with **Angular + Bootstrap** and backend with **Django REST Framework + PostgreSQL**.
 
+## Design Prototype
+
+The initial design for the application was created in Figma:  
+
+![Figma design of WAT web app](assets/figma-design.png)
+
 ---
 
 ## Features

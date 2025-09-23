@@ -7,7 +7,7 @@ Frontend is built with **Angular + Bootstrap** and backend with **Django REST Fr
 
 The initial design for the application was created in Figma:  
 
-![Figma design of WAT web app](assets/Angular_Django Reference.png)
+![Figma design of WAT web app](assets/figma-design.png)
 
 ---
 

@@ -5,9 +5,6 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load environment variables from the .env file inside /backend
-load_dotenv(BASE_DIR / ".env")
-
 """
 Django settings for config project.
 
@@ -49,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # new
     'api',             # new
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +57,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -83,6 +86,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+
+
+load_dotenv(BASE_DIR.parent / ".env")  # Load .env file
 
 DATABASES = {
     'default': {

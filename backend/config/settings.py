@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '.env'))  # Ensure the .env file is loaded
 
 """
 Django settings for config project.
@@ -88,14 +89,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
-load_dotenv(BASE_DIR.parent / ".env")  # Load .env file
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'NAME': os.environ.get('DB_NAME'),  # Your DB name
+        'USER': os.environ.get('DB_USER'),  # Your DB username
+        'PASSWORD': os.environ.get('DB_PASSWORD'),  # Your DB password
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432'),
     }

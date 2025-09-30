@@ -7,26 +7,26 @@ import { environment } from '../environments/environment';  // Import environmen
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = environment.apiUrl;  // Uses the apiUrl from environment.ts
+  private apiUrl = environment.apiUrl;  // Using the apiUrl from environment.ts
 
   constructor(private http: HttpClient) { }
 
-  // Function to get Mentor Texts (Example of GET request)
+  // Function to get Mentor Texts from the API
   getMentorTexts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}mentor-texts/`);
   }
 
-  // Add function to create a Mentor Text (POST request)
+  // Function to create a new Mentor Text
   createMentorText(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}mentor-texts/`, data);
   }
 
-  // Add function to update a Mentor Text (PUT request)
+  // Function to update an existing Mentor Text
   updateMentorText(id: number, data: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}mentor-texts/${id}/`, data);
   }
 
-  // Add function to delete a Mentor Text (DELETE request)
+  // Function to delete a Mentor Text
   deleteMentorText(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}mentor-texts/${id}/`);
   }

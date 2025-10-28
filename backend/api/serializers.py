@@ -23,7 +23,6 @@ class RubricSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'description', 'category']
 
 class MentorTextSerializer(serializers.ModelSerializer):
-    skill = SkillSerializer(read_only=True)  # Optional: Shows Skill details instead of just ID
 
     class Meta:
         model = MentorText

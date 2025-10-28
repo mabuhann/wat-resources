@@ -1,12 +1,18 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MentorTexts } from './mentor-texts/mentor-texts';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule,  MentorTexts],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('wat-frontend');
+  selectedTab = signal<string>('mentor-texts');
+
+  switchTab(tab: string) {
+    this.selectedTab.set(tab);
+  }
 }

@@ -1,0 +1,26 @@
+<div class="content-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Sr. No.</th>
+        <th>Rubric Name</th>
+        <th>Description</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (rubric of rubrics(); track rubric.id; let i = $index) {
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ rubric.title }}</td>
+          <td>{{ rubric.description }}</td>
+          <td>{{ rubric.category }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="4" class="empty-state">No rubrics found.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

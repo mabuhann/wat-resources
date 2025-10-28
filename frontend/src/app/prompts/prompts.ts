@@ -1,19 +1,31 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../api.service';
+import { ApiService, Prompt } from '../api.service';
 
 @Component({
   selector: 'app-prompts',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './prompts.html',
-  styleUrls: ['./prompts.css']
+  styleUrls: ['./prompts.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Prompts implements OnInit {
-  prompts = signal<any[]>([]);
-
-  constructor(private apiService: ApiService) {}
+  private apiService = inject(ApiService);
+  prompts = signal<Prompt[]>([]);
 
   ngOnInit(): void {
+    this.getPrompts();
+  }
+
+  getPrompts(): void {
+    this.apiService.getPrompts().subscribe({
+      next: (data) => {
+        console.log('Fetched prompts:', data);
+        this.prompts.set(data);
+      },
+      error: (error) => {
+        console.error('Error fetching prompts:', error);
+      }
+    });
   }
 }

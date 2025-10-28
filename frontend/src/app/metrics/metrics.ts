@@ -1,20 +1,31 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../api.service';
+import { ApiService, Metric } from '../api.service';
 
 @Component({
   selector: 'app-metrics',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './metrics.html',
-  styleUrls: ['./metrics.css']
+  styleUrls: ['./metrics.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Metrics implements OnInit {
-  metrics = signal<any[]>([]);
-
-  constructor(private apiService: ApiService) {}
+  private apiService = inject(ApiService);
+  metrics = signal<Metric[]>([]);
 
   ngOnInit(): void {
+    this.getMetrics();
   }
 
+  getMetrics(): void {
+    this.apiService.getMetrics().subscribe({
+      next: (data) => {
+        console.log('Fetched metrics:', data);
+        this.metrics.set(data);
+      },
+      error: (error) => {
+        console.error('Error fetching metrics:', error);
+      }
+    });
+  }
 }

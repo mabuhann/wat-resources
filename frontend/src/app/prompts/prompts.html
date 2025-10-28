@@ -1,0 +1,26 @@
+<div class="content-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Sr. No.</th>
+        <th>Prompt Name</th>
+        <th>Description</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (prompt of prompts(); track prompt.id; let i = $index) {
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ prompt.title }}</td>
+          <td>{{ prompt.description }}</td>
+          <td>{{ prompt.category }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="4" class="empty-state">No prompts found.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

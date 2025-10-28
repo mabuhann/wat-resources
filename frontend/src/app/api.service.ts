@@ -17,6 +17,27 @@ export interface MentorText {
   created_on?: string;
 }
 
+export interface Metric {
+  id?: number;
+  title: string;
+  description: string;
+  category: string;
+}
+
+export interface Prompt {
+  id?: number;
+  title: string;
+  description: string;
+  category: string;
+}
+
+export interface Rubric {
+  id?: number;
+  title: string;
+  description: string;
+  category: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,17 +72,17 @@ export class ApiService {
   }
 
   // Metrics
-  getMetrics(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/metrics/`);
+  getMetrics(): Observable<Metric[]> {
+    return this.http.get<Metric[]>(`${this.apiUrl}/metrics/`);
   }
 
   // Prompts
-  getPrompts(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/prompts/`);
+  getPrompts(): Observable<Prompt[]> {
+    return this.http.get<Prompt[]>(`${this.apiUrl}/prompts/`);
   }
 
   // Rubrics
-  getRubrics(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/rubrics/`);
+  getRubrics(): Observable<Rubric[]> {
+    return this.http.get<Rubric[]>(`${this.apiUrl}/rubrics/`);
   }
 }

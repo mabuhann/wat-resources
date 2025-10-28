@@ -16,5 +16,16 @@
             (click)="switchTab('metrics')">Metrics</button>
   </div>
 
-  <app-mentor-texts *ngIf="selectedTab() === 'mentor-texts'"></app-mentor-texts>
+  @if (selectedTab() === 'metrics') {
+    <app-metrics />
+  }
+  @if (selectedTab() === 'prompts') {
+    <app-prompts />
+  }
+  @if (selectedTab() === 'rubrics') {
+    <app-rubrics />
+  }
+  @if (selectedTab() === 'mentor-texts') {
+    <app-mentor-texts />
+  }
 </div>

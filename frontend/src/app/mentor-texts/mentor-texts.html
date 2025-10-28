@@ -95,39 +95,9 @@
                   <option [value]="skill.id">{{ skill.title }}</option>
                 }
               </select>
-              <button type="button" (click)="toggleAddSkill()" class="btn-secondary btn-sm">
-                {{ isAddingSkill() ? 'Cancel' : '+ New Skill' }}
-              </button>
             </div>
             
-            @if (isAddingSkill()) {
-              <div class="quick-add-skill">
-                <h4>Create New Skill</h4>
-                <div class="form-group">
-                  <label for="skillTitle">Skill Title</label>
-                  <input 
-                    id="skillTitle"
-                    type="text" 
-                    [(ngModel)]="newSkill.title"
-                    name="skillTitle"
-                    placeholder="e.g., Grammar"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="skillDescription">Skill Description</label>
-                  <input 
-                    id="skillDescription"
-                    type="text" 
-                    [(ngModel)]="newSkill.description"
-                    name="skillDescription"
-                    placeholder="e.g., Grammar and syntax skills"
-                  />
-                </div>
-                <button type="button" (click)="createQuickSkill()" class="btn-primary btn-sm">
-                  Add Skill
-                </button>
-              </div>
-            }
+
           </div>
 
           <div class="modal-actions">

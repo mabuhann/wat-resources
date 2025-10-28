@@ -102,7 +102,7 @@
   background-color: #006064;
 }
 
-/* Table */
+/* Bootstrap Table Customization */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -200,7 +200,7 @@
   font-size: 15px;
 }
 
-/* Modal */
+/* Modal - Bootstrap Enhanced */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -259,7 +259,7 @@
   color: #333;
 }
 
-/* Form */
+/* Form - Bootstrap Enhanced */
 .modal-form .form-group {
   margin-bottom: 20px;
 }

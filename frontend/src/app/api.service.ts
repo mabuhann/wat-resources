@@ -1,32 +1,67 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+export interface Skill {
+  id?: number;
+  title: string;
+  description: string;
+}
+
+export interface MentorText {
+  id?: number;
+  title: string;
+  description: string;
+  category: string;
+  skill: number;  // Foreign key to Skill
+  created_on?: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8000/api';  // Replace with the actual backend URL
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:8000/api';
 
-  constructor(private http: HttpClient) {}
-
-  // Fetch all Mentor Texts
-  getMentorTexts(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/mentor-texts/`);
+  // Skills
+  getSkills(): Observable<Skill[]> {
+    return this.http.get<Skill[]>(`${this.apiUrl}/skills/`);
   }
 
-  // Create a new Mentor Text
-  createMentorText(mentorText: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/mentor-texts/`, mentorText);
+  createSkill(skill: Skill): Observable<Skill> {
+    return this.http.post<Skill>(`${this.apiUrl}/skills/`, skill);
   }
 
-  // Update an existing Mentor Text
-  updateMentorText(mentorText: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/mentor-texts/${mentorText.id}/`, mentorText);
+  // Mentor Texts
+  getMentorTexts(): Observable<MentorText[]> {
+    return this.http.get<MentorText[]>(`${this.apiUrl}/mentor-texts/`);
   }
 
-  // Delete a Mentor Text
-  deleteMentorText(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/mentor-texts/${id}/`);
+  createMentorText(mentorText: MentorText): Observable<MentorText> {
+    return this.http.post<MentorText>(`${this.apiUrl}/mentor-texts/`, mentorText);
+  }
+
+  updateMentorText(mentorText: MentorText): Observable<MentorText> {
+    return this.http.put<MentorText>(`${this.apiUrl}/mentor-texts/${mentorText.id}/`, mentorText);
+  }
+
+  deleteMentorText(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/mentor-texts/${id}/`);
+  }
+
+  // Metrics
+  getMetrics(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/metrics/`);
+  }
+
+  // Prompts
+  getPrompts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/prompts/`);
+  }
+
+  // Rubrics
+  getRubrics(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/rubrics/`);
   }
 }

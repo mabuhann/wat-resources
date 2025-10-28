@@ -1,29 +1,49 @@
 <div class="mentor-texts-container">
-  <div class="header">
-    <h1>Mentor Texts</h1>
-    <button (click)="openNewModal()" class="btn-primary">Add New Mentor Text</button>
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Resources Library</h1>
   </div>
 
-  <table class="mentor-texts-table">
+  <!-- Tabs Navigation -->
+  <div class="tabs-container">
+    <button class="tab-btn">Prompts</button>
+    <button class="tab-btn">Rubrics</button>
+    <button class="tab-btn tab-active">Mentor Texts</button>
+  </div>
+
+  <!-- Sub-tabs for categories -->
+  <div class="sub-tabs-container">
+    <button class="sub-tab-btn sub-tab-active">Source-Based</button>
+    <button class="sub-tab-btn">Persuasive</button>
+    <button class="sub-tab-btn">Summary</button>
+  </div>
+
+  <!-- Action Button -->
+  <div class="action-header">
+    <button (click)="openNewModal()" class="btn-new-mentor">New Mentor Text</button>
+  </div>
+
+  <!-- Table -->
+  <table class="data-table">
     <thead>
       <tr>
-        <th>Title</th>
+        <th>Sr. No.</th>
+        <th>Mentor Text Name</th>
         <th>Description</th>
-        <th>Category</th>
         <th>Skill</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      @for (mentorText of mentorTexts(); track mentorText.id) {
+      @for (mentorText of mentorTexts(); track mentorText.id; let i = $index) {
         <tr>
+          <td>{{ i + 1 }}</td>
           <td>{{ mentorText.title }}</td>
           <td>{{ mentorText.description }}</td>
-          <td>{{ mentorText.category }}</td>
           <td>{{ getSkillTitle(mentorText.skill) }}</td>
-          <td>
-            <button (click)="openEditModal(mentorText)" class="btn-edit">Edit</button>
-            <button (click)="deleteMentorText(mentorText.id!)" class="btn-delete">Delete</button>
+          <td class="actions-cell">
+            <button (click)="openEditModal(mentorText)" class="action-link view-edit">View/Edit</button>
+            <button (click)="deleteMentorText(mentorText.id!)" class="action-link delete">Delete</button>
           </td>
         </tr>
       } @empty {
@@ -80,26 +100,23 @@
 
           <div class="form-group">
             <label for="skill">Skill</label>
-            <select 
-              id="skill"
-              [(ngModel)]="selectedMentorText.skill"
-              name="skill"
-              required
-            >
-              <option [value]="undefined" disabled>Select a skill</option>
-              @for (skill of skills(); track skill.id) {
-                <option [value]="skill.id">{{ skill.title }}</option>
-              }
-            </select>
-            
-            @if (skills().length === 0) {
-              <div class="skill-helper">
-                <small class="text-muted">No skills available.</small>
-                <button type="button" (click)="toggleAddSkill()" class="btn-link">
-                  {{ isAddingSkill() ? 'Cancel' : '+ Create a new skill' }}
-                </button>
-              </div>
-            }
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <select 
+                id="skill"
+                [(ngModel)]="selectedMentorText.skill"
+                name="skill"
+                required
+                style="flex: 1;"
+              >
+                <option [value]="undefined" disabled>Select a skill</option>
+                @for (skill of skills(); track skill.id) {
+                  <option [value]="skill.id">{{ skill.title }}</option>
+                }
+              </select>
+              <button type="button" (click)="toggleAddSkill()" class="btn-secondary btn-sm">
+                {{ isAddingSkill() ? 'Cancel' : '+ New Skill' }}
+              </button>
+            </div>
             
             @if (isAddingSkill()) {
               <div class="quick-add-skill">
